@@ -1,0 +1,31 @@
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
+const LoginRouter = require('../routes/LoginRouter');
+const RegisterRouter = require('../routes/RegisterRouter');
+const SallersRouter = require('../routes/SellersRouter');
+const SalesRouter = require('../routes/SalesRouter');
+const getUserOrders = require('../routes/UserOrdersRouter');
+const ProductsRouter = require('../routes/ProductsRouter');
+const RegisterByRoleRouter = require('../routes/RegisterByRoleRouter');
+const GetAllExcludeAdmRouter = require('../routes/GetAllExcludeAdmRouter');
+const DeleteUserRouter = require('../routes/DeleteUserRouter');
+const SalesProductsRouter = require('../routes/SalesProductsRouter');
+
+const app = express();
+app.use(express.json());
+app.use(cors());
+app.use('/login', LoginRouter);
+app.use('/register', RegisterRouter);
+app.use('/roleregister', RegisterByRoleRouter);
+app.use('/sellers', SallersRouter);
+app.use('/sales', SalesRouter);
+app.use('/deleteuser', DeleteUserRouter);
+app.use('/allexcludeadm', GetAllExcludeAdmRouter);
+app.use('/products', ProductsRouter);
+app.use('/salesProducts', SalesProductsRouter);
+app.use('/orders', getUserOrders);
+app.use('/images', express.static(path.resolve(__dirname, '../../public')));
+app.get('/coffee', (_req, res) => res.status(418).end());
+
+module.exports = app;
